@@ -48,7 +48,7 @@ learning frameworks available for Python:
 .. warning::
 
    As of version 0.9 (released in September 2011), the import path for
-   scikit-learn has changed from `scikits.learn` to `sklearn`
+   scikit-learn has changed from `sklearn` to `sklearn`
 
 ..
   For doctesting, to avoid having figures poping up
