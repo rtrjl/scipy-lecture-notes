@@ -4,7 +4,7 @@
 Matplotlib
 ==========
 
-:author: Mike Müller
+:author: Mike Müller, Alexandre Gramfort
 
 Introduction
 ------------
@@ -54,12 +54,12 @@ This brings us to the IPython prompt:
     %magic  -> Information about IPython's 'magic' % functions.
     help    -> Python's own help system.
     object? -> Details about 'object'. ?object also works, ?? prints more.
-    
+
     Welcome to pylab, a matplotlib-based Python environment.
     For more information, type 'help(pylab)'.
 
 .. code-block:: ipython
-        
+
     In [1]:
 
 Now we can make our first, really simple plot:
@@ -78,16 +78,15 @@ The numbers form 0 through 9 are plotted:
 .. image:: figures/simple.png
     :width: 50%
 
-.. note:: 
-   
+.. note::
+
    In the following, we use the Python prompt ">>>" rather than
    the IPython one, as it facilitates copy-pasting in IPython (using the
    `%doctest_mode`).
 
-.. for doctests 
+.. for doctests
   >>> import numpy as np
   >>> import pylab as pl
-
 
 Now we can interactively add features to or plot::
 
@@ -97,17 +96,22 @@ Now we can interactively add features to or plot::
     >>> pl.ylabel('calculated') # doctest: +ELLIPSIS
     <matplotlib.text.Text instance at ...>
 
-    >>> pl.title('Measured vs. calculated') +ELLIPSIS
+    >>> pl.title('Measured vs. calculated') # doctest: +ELLIPSIS
     <matplotlib.text.Text instance at ...>
 
     >>> pl.grid(True)
+
+
+.. plot:: pyplots/demo_plot.py
+  :scale: 100
+
 
 We get a reference to our plot::
 
     >>> my_plot = pl.gca()
 
 and to our line we plotted, which is the first in the plot::
-    
+
     >>> line = my_plot.lines[0]
 
 Now we can set properties using ``set_something`` methods::
@@ -129,14 +133,26 @@ We can also add several lines to one plot::
 
     >>> linear = np.arange(100)
 
-    >>> square = [v * v for v in np.arange(0, 10, 0.1)]
+    >>> square = np.arange(0, 10, 0.1) ** 2
 
     >>> lines = pl.plot(x, linear, x, square)
-    
+
 Let's add a legend::
 
     >>> pl.legend(('linear', 'square'))     # doctest: +ELLIPSIS
     <matplotlib.legend.Legend instance at ...>
+
+.. note::
+
+    If you run the code from the script the figure won't be displayed
+    unless you request it.
+
+To require the display use::
+
+    >>> pl.show()
+
+.. plot:: pyplots/demo_plot2.py
+  :scale: 100
 
 This does not look particularly nice. We would rather like to have it at
 the left. So we clean the old graph (clf stands for 'clear figure)::
@@ -147,17 +163,31 @@ and print it anew providing new line styles (a green dotted
 line with crosses for the linear and a red dashed line with
 circles for the square graph)::
 
-    >>> lines = plot(x, linear, 'g:+', x, square, 'r--o')
+    >>> lines = pl.plot(x, linear, 'g:+', x, square, 'r--o')
 
 Now we add the legend at the upper left corner::
 
-    >>> l = legend(('linear', 'square'), loc='upper left')
+    >>> l = pl.legend(('linear', 'square'), loc='upper left')
 
 The result looks like this:
 
 .. image:: figures/legend.png
     :width: 50%
 
+An alternative way to do the same thing is to use the *label* keyword.
+
+    >>> pl.clf()
+    >>> pl.plot(x, linear, 'g:+', label='linear')
+    >>> pl.plot(x, square, 'r--o', label='square')
+    >>> pl.legend(loc='upper left')
+
+Saving a figure
+...............
+
+matplotlib can save figures in many different image formats (PNG, JPEG)
+including vectorized ones (PDF, PS, EPS, SVG)::
+
+    >>> pl.savefig('my_plot.pdf')
 
 .. topic:: Exercises
     :class: green
@@ -169,6 +199,7 @@ The result looks like this:
 
     3) Add a legend and a grid to the plot.
 
+    4) Save the graph in a PNG file.
 
 Properties
 ----------
@@ -234,7 +265,7 @@ Symbol      Description
  ``_``      horizontal line symbols
  ``steps``  use gnuplot style 'steps' # kwarg only
 =========== ======================================
- 
+
 Colors can be given in many ways: one-letter abbreviations, gray scale
 intensity from 0 to 1, RGB in hex and tuple format as well as
 any legal html color name.
@@ -258,7 +289,7 @@ Abbreviation Color
 Other objects also have properties. The following table list
 the text properties:
 
-==================== ========================================================== 
+==================== ==========================================================
 Property             Value
 ==================== ==========================================================
 alpha                alpha transparency on 0-1 scale
@@ -278,13 +309,15 @@ verticalalignment    top, bottom or center
 weight               font weight, e.g. normal, bold, heavy, light
 ==================== ==========================================================
 
-.. topci:: Exercise
+.. topic:: Exercise
     :class: green
 
-    Apply different line styles to a plot. Change line color and
+    Try to reproduce the following plot by applying different line
+    styles to the previous plot. Change line color and
     thickness as well as the size and the kind of the marker.
-    Experiment with different styles.
 
+.. plot:: pyplots/demo_plot3.py
+  :scale: 100
 
 Text
 ----
@@ -304,7 +337,7 @@ There are two functions to put text at a defined position.
 
 .. image:: figures/text.png
     :width: 50%
-    
+
 ``matplotlib`` supports TeX mathematical expression. So ``r'$\pi$'``
 will show up as:
 
@@ -317,13 +350,13 @@ If you want to get more control over where the text goes, you
 use annotations::
 
     >>> ax = pl.gca()
-    >>> ax.annotate('Here is something special', xy = (1, 1)) # doctest: +ELLIPSIS
+    >>> ax.annotate('Here is something special', xy=(1, 1)) # doctest: +ELLIPSIS
     <matplotlib.text.Annotation instance at ...>
 
 We will write the text at the position (1, 1) in terms of data.
 There are many optional arguments that help to customize
 the position of the text.  The arguments ``textcoords`` and
-``xycoords`` specifies what ``x`` and ``y`` mean: 
+``xycoords`` specifies what ``x`` and ``y`` mean:
 
 ==================== ===================================================
 argument             coordinate system
@@ -347,12 +380,15 @@ in detail::
 
     >>> ax = pl.gca()
 
-    >>> ax.annotate('Here is something special', xy = (2, 1), xytext=(1,5)) # doctest: +ELLIPSIS
+    >>> ax.annotate('Here is something special', xy=(2, 1), xytext=(1, 5)) # doctest: +ELLIPSIS
     <matplotlib.text.Annotation instance at ...>
 
-    >>> ax.annotate('Here is something special', xy = (2, 1), xytext=(1,5),
+    >>> ax.annotate('Here is something special', xy=(2, 1), xytext=(1, 5),
     ...             arrowprops={'facecolor': 'r'}) # doctest: +ELLIPSIS
     <matplotlib.text.Annotation instance at ...>
+
+.. plot:: pyplots/demo_plot_annotate.py
+  :scale: 100
 
 .. topic:: Exercise
    :class: green
@@ -594,6 +630,21 @@ The result looks like this:
 
     3) Place a small plot in one bigger plot.
 
+Tips and tricks
+................
+
+An alternative to pl.subplot is pl.subplots which returns an array
+of subplots to easier manipulation::
+
+    >>> fig, axes = pl.subplots(2, 2, sharex=True, sharey=True)
+    >>> for ax in axes.flat:
+    >>>     ax.plot(np.random.randn(10))
+    >>>     ax.grid(True)
+
+.. plot:: pyplots/demo_subplots.py
+  :scale: 100
+
+
 Other Types of Plots
 --------------------
 
@@ -604,6 +655,34 @@ So far we have used only line plots. ``matplotlib`` offers many more types
 of plots. We will have a brief look at some of them. All functions have many
 optional arguments that are not shown here.
 
+
+Images
+.......
+
+The function ``imshow`` can be used to visualize images.
+
+Load an image::
+
+    >>> import scipy as sp
+    >>> l = sp.misc.lena()
+
+Visualize it::
+
+    >>> pl.imshow(l, cmap=pl.cm.gray)
+    >>> pl.axis('off')
+
+.. plot:: pyplots/demo_imshow.py
+  :scale: 100
+
+You might want to visualize arrays as images. For this
+you should disable the linear interpolation::
+
+    >>> a = np.random.randn(5, 5)
+    >>> pl.imshow(a, cmap=pl.cm.jet, interpolation='nearest')
+    >>> pl.axis('off')
+
+.. plot:: pyplots/demo_imshow2.py
+  :scale: 100
 
 Bar Charts
 ...........
@@ -660,9 +739,9 @@ We changes the extension of the y-axis to make plot look nicer::
     >>> ax.set_ylim(0, 5)
     (0, 5)
     >>> pl.draw()
-    
 
-and get this: 
+
+and get this:
 
 .. raw:: pdf
 
@@ -702,45 +781,37 @@ Contour Plots
 We can also do contour plots. We define arrays for the
 x and y coordinates::
 
-    >>> x = y = np.arange(10)
+    >>> x, y = np.mgrid[0:100, 0:100]
 
 and also a 2D array for z::
 
-    >>> z = np.ones((10, 10))
-    >>> z[5, 5] = 7
-    >>> z[2, 1] = 3
-    >>> z[8, 7] = 4
-    >>> z
-    array([[ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  3.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  7.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  4.,  1.,  1.],
-           [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]])
-        
+    >>> z = np.zeros((100, 100), dtype=np.float)
+    >>> z[50, 50] = 1e3
+
+We then smooth it to show contours::
+
+    >>> from scipy import ndimage
+    >>> z = ndimage.gaussian_filter(z, sigma=20)
+
 Now we can make a simple contour plot::
 
-    >>> pl.contour(x, x, z)
+    >>> pl.contour(x, x, z, 5)  # Only show 5 contour lines
 
-Our plot looks like this:
 
-.. image:: figures/contour.png
-            :width: 25%
+.. plot:: pyplots/demo_contour.py
+  :scale: 100
 
-We can also fill the area. We just use numbers form 0 to 9 for
-the values ``v``::
+We can also fill the area with a custom colormap::
 
-    >>> v = x
-    >>> pl.contourf(x, x, z, v)
+    >>> cs = pl.contourf(x, y, z, 5, cmap=pl.cm.gnuplot)
 
-Now our plot area is filled:
+and add a colorbar::
 
-.. image:: figures/contourf.png
-            :width: 25%
+    >>> pl.colorbar()
+
+.. plot:: pyplots/demo_contourf.py
+  :scale: 100
+
 
 Histograms
 ...........
@@ -748,10 +819,10 @@ Histograms
 We can make histograms. Let's get some normally distributed
 random numbers from ``numpy``::
 
-    >>> r_numbers = np.random.normal(size= 1000)
+    >>> r_numbers = np.random.normal(size=1000)
 
 Now we make a simple histogram::
-    
+
     >>> pl.hist(r_numbers)
 
 With 100 numbers our figure looks pretty good:
@@ -771,10 +842,10 @@ Plots with logarithmic scales are easy::
     >>> pl.loglog(np.arange(1000))
 
 We set the major and minor grid::
-    
+
     >>> pl.grid(True)
     >>> pl.grid(True, which='minor')
-    
+
 Now we have loglog plot:
 
 .. image:: figures/loglog.png
@@ -792,7 +863,7 @@ Pie charts can also be created with a few lines::
     >>> data = [500, 700, 300]
     >>> labels = ['cats', 'dogs', 'other']
     >>> pl.pie(data, labels=labels)
-    
+
 The result looks as expected:
 
 .. image:: figures/pie.png
@@ -809,7 +880,7 @@ convert them to radians::
     >>> theta = r / (180/pi)
 
 Now plot in polar coordinates::
-    
+
     >>> pl.polar(theta, r)
 
 We get a nice spiral:
@@ -823,7 +894,7 @@ Arrow Plots
 Plotting arrows in 2D plane can be achieved with ``quiver``.
 We define the x and y coordinates of the arrow shafts::
 
-    >>> x = y = np.arange(10)
+    >>> x, y = np.mgrid[0:10, 0:10]
 
 The x and y components of the arrows are specified as 2D arrays::
 
@@ -845,34 +916,29 @@ other at location (1, 1) has -1 unit in y direction:
 
      Spacer 0 10
 
-.. image:: figures/quiver.png
-            :width: 25%
-         
+.. plot:: pyplots/demo_quiver.py
+  :scale: 100
+
 Scatter Plots
 ...............
 
 Scatter plots print x vs. y diagrams. We define ``x`` and ``y``
-and make some point in ``y`` random::
+as random coordinates and ``value`` used for the size and color
+of the dots::
 
-    >>> x = np.arange(10)
-    >>> y = np.arange(10)
-    >>> y[1] = 7
-    >>> y[4] = 2
-    >>> y[8] = 3
+    >>> x, y, value = np.random.normal(size=(3, 50))
 
 Now make a scatter plot::
-    
-    >>> pl.scatter(x, y)
 
-The three different values for ``y`` break out of the line:
+    >>> pl.scatter(x, y, np.abs(50 * value), c=value)
 
 .. raw:: pdf
 
      Spacer 0 10
 
-.. image:: figures/scatter.png
-            :width: 25%
-         
+.. plot:: pyplots/demo_scatter.py
+  :scale: 100
+
 
 Sparsity Pattern Plots
 .......................
@@ -941,7 +1007,7 @@ We reuse our data from the scatter plot (see above)::
 
     >>> y
     array([0, 7, 2, 3, 2, 5, 6, 7, 3, 9])
-     
+
 Now we can plot the dates at the x axis::
 
     >>> pl.plot_date(dates, y)
@@ -1067,4 +1133,19 @@ If so, please adjust the ``figsize`` for ``pylab`` accordingly.
    1) Use the object-oriented API of matplotlib to create a png-file
       with a plot of two lines, one linear and square with a legend in it.
 
+Customization
+-------------
 
+matplotlib can be entirely customized. Option 1 is to edit a custom
+configuration file called *matplotlibrc* or do the customization within
+a file using pl.rcParams::
+
+    >>> fig = pl.figure(edgecolor='y', facecolor='k')
+    >>> pl.rcParams['axes.linewidth'] = 2
+    >>> pl.rcParams['axes.edgecolor'] = 'y'
+    >>> pl.rcParams['axes.facecolor'] = 'k'
+    >>> pl.rcParams['xtick.color'] = 'y'
+    >>> pl.rcParams['ytick.color'] = 'y'
+
+.. plot:: pyplots/demo_plot_custom.py
+  :scale: 100

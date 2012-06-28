@@ -28,6 +28,8 @@ Listed by alphabetical order.
 
 - Emmanuelle Gouillart
 
+- Alexandre Gramfort
+
 - Mike Müller
 
 - Fabian Pedregosa
