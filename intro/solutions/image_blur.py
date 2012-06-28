@@ -4,10 +4,10 @@ Simple image blur by convolution with a Gaussian kernel
 
 import numpy as np
 from scipy import fftpack
-import matplotlib.pyplot as plt
+import pylab as pl
 
 # read image
-img = plt.imread('../../data/elephant.png')
+img = pl.imread('../../data/elephant.png')
 
 # prepare an 1-D Gaussian convolution kernel
 t = np.linspace(-10, 10, 30)
@@ -29,8 +29,8 @@ img2 = fftpack.ifft2(img2_ft, axes=(0, 1)).real
 img2 = np.clip(img2, 0, 1)
 
 # plot output
-plt.imshow(img2)
-plt.show()
+pl.imshow(img2)
+pl.show()
 
 # Further exercise (only if you are familiar with this stuff):
 #

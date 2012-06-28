@@ -27,13 +27,13 @@ Changing orientation, resolution, .. ::
 
 .. sourcecode:: ipython
 
-    In [35]: subplot(151)
+    In [35]: pl.subplot(151)
     Out[35]: <matplotlib.axes.AxesSubplot object at 0x925f46c>
 
     In [36]: pl.imshow(shifted_lena, cmap=cm.gray)
     Out[36]: <matplotlib.image.AxesImage object at 0x9593f6c>
 
-    In [37]: axis('off')
+    In [37]: pl.axis('off')
     Out[37]: (-0.5, 511.5, 511.5, -0.5)
 
     In [39]: # etc.
@@ -48,11 +48,11 @@ Image filtering
     >>> lena = misc.lena()
     >>> import numpy as np
     >>> noisy_lena = np.copy(lena).astype(np.float)
-    >>> noisy_lena += lena.std()*0.5*np.random.standard_normal(lena.shape)
+    >>> noisy_lena += lena.std() * 0.5 * np.random.standard_normal(lena.shape)
     >>> blurred_lena = ndimage.gaussian_filter(noisy_lena, sigma=3)
     >>> median_lena = ndimage.median_filter(blurred_lena, size=5)
     >>> from scipy import signal
-    >>> wiener_lena = signal.wiener(blurred_lena, (5,5))
+    >>> wiener_lena = signal.wiener(blurred_lena, (5, 5))
 
 .. image:: image_processing/filtered_lena.png
    :align: center
@@ -65,6 +65,15 @@ can be applied to images
 .. topic:: Exercise
 
     Compare histograms for the different filtered images.
+
+.. topic:: Exercise
+
+    Filter the Lena image ``scipy.misc.lena()`` with 2 Gaussian filters
+    (sigma=0.5 and sigma=1) and compute the difference between the 2 images.
+    It should enhance the contours of the image and produce the image below.
+
+.. plot:: intro/solutions/image_dog.py
+  :scale: 100
 
 Mathematical morphology
 ........................
