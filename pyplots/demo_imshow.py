@@ -1,6 +1,6 @@
-import scipy as sp
+from scipy import misc
 import pylab as pl
 
-l = sp.misc.lena()
+l = misc.lena()
 pl.imshow(l, cmap=pl.cm.gray)
 pl.axis('off')
