@@ -663,8 +663,8 @@ The function ``imshow`` can be used to visualize images.
 
 Load an image::
 
-    >>> import scipy as sp
-    >>> l = sp.misc.lena()
+    >>> from scipy image misc
+    >>> l = misc.lena()
 
 Visualize it::
 
