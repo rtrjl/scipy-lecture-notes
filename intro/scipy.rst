@@ -1,7 +1,7 @@
 Scipy : high-level scientific computing
 =========================================
 
-:authors: Adrien Chauve, Andre Espaze, Emmanuelle Gouillart, Gaël Varoquaux
+:authors: Adrien Chauve, Andre Espaze, Emmanuelle Gouillart, Gaël Varoquaux, Alexandre Gramfort
 
 ..  
     >>> import numpy as np
