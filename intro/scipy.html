@@ -55,7 +55,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">authors:</th><td class="field-body">Adrien Chauve, Andre Espaze, Emmanuelle Gouillart, Gaël Varoquaux</td>
+<tr class="field-odd field"><th class="field-name">authors:</th><td class="field-body">Adrien Chauve, Andre Espaze, Emmanuelle Gouillart, Gaël Varoquaux, Alexandre Gramfort</td>
 </tr>
 </tbody>
 </table>
@@ -121,7 +121,7 @@ general idea of how to use <tt class="docutils literal"><span class="pre">scipy<
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy</span>
 </pre></div>
 </div>
-<p><tt class="xref py py-obj docutils literal"><span class="pre">scipy</span></tt> is mainly composed of task-specific sub-modules:</p>
+<p><cite>scipy</cite> is mainly composed of task-specific sub-modules:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="22%" />
@@ -247,7 +247,7 @@ namespace is imported by the line <tt class="docutils literal"><span class="pre"
 <p>[<a class="reference external" href="../plot_directive/pyplots/demo_detrend.py">source code</a>, <a class="reference external" href="../plot_directive/pyplots/demo_detrend.hires.png">hires.png</a>, <a class="reference external" href="../plot_directive/pyplots/demo_detrend.pdf">pdf</a>]</p>
 <a class="reference internal image-reference" href="../_images/demo_detrend.png"><img alt="../_images/demo_detrend.png" src="../_images/demo_detrend.png" style="width: 308.0px; height: 252.0px;" /></a>
 </li>
-<li><p class="first">Resample: resample a signal to <tt class="xref py py-obj docutils literal"><span class="pre">n</span></tt> points using FFT.</p>
+<li><p class="first">Resample: resample a signal to <cite>n</cite> points using FFT.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
@@ -258,7 +258,7 @@ namespace is imported by the line <tt class="docutils literal"><span class="pre"
 <p>[<a class="reference external" href="../plot_directive/pyplots/demo_resample.py">source code</a>, <a class="reference external" href="../plot_directive/pyplots/demo_resample.hires.png">hires.png</a>, <a class="reference external" href="../plot_directive/pyplots/demo_resample.pdf">pdf</a>]</p>
 <a class="reference internal image-reference" href="../_images/demo_resample.png"><img alt="../_images/demo_resample.png" src="../_images/demo_resample.png" style="width: 308.0px; height: 252.0px;" /></a>
 </li>
-<li><p class="first">Signal has many window function: <tt class="xref py py-obj docutils literal"><span class="pre">hamming</span></tt>, <tt class="xref py py-obj docutils literal"><span class="pre">bartlett</span></tt>, <tt class="xref py py-obj docutils literal"><span class="pre">blackman</span></tt>...</p>
+<li><p class="first">Signal has many window function: <cite>hamming</cite>, <cite>bartlett</cite>, <cite>blackman</cite>...</p>
 </li>
 <li><p class="first">Signal has filtering (Gaussian, median filter, Wiener), but we will
 discuss this in the image paragraph.</p>
@@ -271,21 +271,21 @@ discuss this in the image paragraph.</p>
 is well-written and we will not list them. Frequently used ones are:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Bessel function, such as <tt class="xref py py-obj docutils literal"><span class="pre">special.jn</span></tt> (nth integer order Bessel
+<li>Bessel function, such as <cite>special.jn</cite> (nth integer order Bessel
 function)</li>
-<li>Elliptic function (<tt class="xref py py-obj docutils literal"><span class="pre">special.ellipj</span></tt> for the Jacobian elliptic
+<li>Elliptic function (<cite>special.ellipj</cite> for the Jacobian elliptic
 function, ...)</li>
-<li>Gamma function: <tt class="xref py py-obj docutils literal"><span class="pre">special.gamma</span></tt>, also note <tt class="xref py py-obj docutils literal"><span class="pre">special.gammaln</span></tt> which
+<li>Gamma function: <cite>special.gamma</cite>, also note <cite>special.gammaln</cite> which
 will give the log of Gamma to a higher numerical precision.</li>
-<li>Erf, the area under a Gaussian curve: <tt class="xref py py-obj docutils literal"><span class="pre">special.erf</span></tt></li>
+<li>Erf, the area under a Gaussian curve: <cite>special.erf</cite></li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="statistics-and-random-numbers-scipy-stats">
 <h2><a class="toc-backref" href="#id5">1.6.5. Statistics and random numbers: <tt class="docutils literal"><span class="pre">scipy.stats</span></tt></a><a class="headerlink" href="#statistics-and-random-numbers-scipy-stats" title="Permalink to this headline">¶</a></h2>
-<p>The module <tt class="xref py py-obj docutils literal"><span class="pre">scipy.stats</span></tt> contains statistical tools and probabilistic
+<p>The module <cite>scipy.stats</cite> contains statistical tools and probabilistic
 description of random processes. Random number generators for various
-random process can be found in <tt class="xref py py-obj docutils literal"><span class="pre">numpy.random</span></tt>.</p>
+random process can be found in <cite>numpy.random</cite>.</p>
 <div class="section" id="histogram-and-probability-density-function">
 <h3><a class="toc-backref" href="#id6">1.6.5.1. Histogram and probability density function</a><a class="headerlink" href="#histogram-and-probability-density-function" title="Permalink to this headline">¶</a></h3>
 <p>Given observations of a random process, their histogram is an estimator of
@@ -736,7 +736,7 @@ more advanced example.</p>
 </div>
 <div class="section" id="image-processing-scipy-ndimage">
 <h2><a class="toc-backref" href="#id16">1.6.11. Image processing: <tt class="docutils literal"><span class="pre">scipy.ndimage</span></tt></a><a class="headerlink" href="#image-processing-scipy-ndimage" title="Permalink to this headline">¶</a></h2>
-<p>The submodule dedicated to image processing in scipy is <tt class="xref py py-obj docutils literal"><span class="pre">scipy.ndimage</span></tt>.</p>
+<p>The submodule dedicated to image processing in scipy is <cite>scipy.ndimage</cite>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
 </pre></div>
 </div>
