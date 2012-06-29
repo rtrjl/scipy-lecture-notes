@@ -1,4 +1,3 @@
-
 .. _matplotlib:
 
 Matplotlib
@@ -663,7 +662,7 @@ The function ``imshow`` can be used to visualize images.
 
 Load an image::
 
-    >>> from scipy image misc
+    >>> from scipy import misc
     >>> l = misc.lena()
 
 Visualize it::
